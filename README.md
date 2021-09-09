@@ -1,5 +1,12 @@
 # ChessGame
 
+# The Pawn - 8 figures
+# The Bishop - diagonal elephant
+# The Knight - horse
+# The Rook - tura straight
+# The Queen
+# The King
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
 
 ## Development server

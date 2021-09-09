@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="board">
+    <div *ngFor="let i of matrix">
+      <app-tile [index]="i">
+        <!-- <app-piece
+        >
+        <!-- *ngIf="coord.positionX === (knightPosition$|async).positionX && coord.positionY === (knightPosition$|async).positionY" -->
+          <!-- (click)="tileClick(coord)"
+        </app-piece> -->
+      </app-tile>
+    </div>
+  </div>
+</div>
