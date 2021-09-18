@@ -6,16 +6,22 @@ import { Pawn } from './../piece/pawn';
 import { ChessService } from './../../core/services/chess.service';
 import { Component } from '@angular/core';
 import { range } from 'lodash';
+import { Queen } from '../piece/queen';
+import { King } from '../piece/king';
 
 @Component({
-    selector: 'app-board',
-    templateUrl: './board.component.html',
-    styleUrls: ['./board.component.scss']
+  selector: 'app-board',
+  templateUrl: './board.component.html',
+  styleUrls: ['./board.component.scss']
 })
 export class BoardComponent {
+  higlighted = false;
+
+  pos: number;
+
   matrixRange = range(64);
-  pieces =Array(63).fill(0);
-  // knightPosition$ = this.chessService.knightPosition$;
+  pieces = Array(63).fill(0);
+  highlightedTiles = Array(63);
 
   constructor(private chessService: ChessService) {
 
@@ -37,27 +43,43 @@ export class BoardComponent {
     this.pieces[57] = new Knight(PieceColor.WHITE);
     this.pieces[62] = new Knight(PieceColor.WHITE);
 
-    // this.pieces[2] = new Bishop(PieceColor.BLACK);
-    // this.pieces[5] = new Bishop(PieceColor.BLACK);
-    // this.pieces[56] = new Bishop(PieceColor.WHITE);
-    // this.pieces[61] = new Bishop(PieceColor.WHITE);
+    this.pieces[2] = new Bishop(PieceColor.BLACK);
+    this.pieces[5] = new Bishop(PieceColor.BLACK);
+    this.pieces[58] = new Bishop(PieceColor.WHITE);
+    this.pieces[61] = new Bishop(PieceColor.WHITE);
+
+    this.pieces[3] = new Queen(PieceColor.BLACK);
+    this.pieces[59] = new Queen(PieceColor.WHITE);
+    this.pieces[4] = new King(PieceColor.BLACK);
+    this.pieces[60] = new King(PieceColor.WHITE);
+
   }
 
+  clickTile(ev: any, index: any) {
+    console.log(ev, index);
+    this.highlightedTiles = Array(63);
+    this.highlightedTiles[index] = true;
+  }
 
-
-  // tileClick(pos: PositionCoord) {
-  //   if (this.chessService.canMoveKnight(pos)) {
-  //     this.chessService.moveKnight(pos);
-  //   }
+  // dragStart(event) {
+  //   console.log(event);
+  //   event.dataTransfer.setData("text", event.target.id);
   // }
 
-  // allowDrop($event) {
-  //   console.log(' finish drop',$event);
-  // }
+  drag(ev, i: number) {
+    this.pos = i;
+  }
 
-  // drop($event) {
-  //   console.log(' drop',$event);
-  // }
+  drop(ev, tile) {
+    ev.preventDefault();
+    console.log('drop', ev.targets, tile);
+    this.pieces[tile.index] = this.pieces[this.pos];
+    this.pieces[this.pos] = 0;
+  }
+
+  allowDrop(ev) {
+    ev.preventDefault();
+  }
 
 }
 

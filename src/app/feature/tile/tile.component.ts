@@ -9,11 +9,19 @@ import { Component, Input } from '@angular/core';
 })
 export class TileComponent {
   position: PositionCoord;
+  private indexI: number;
 
   @Input() set index(value: number) {
     this.position = this.getCoord(value);
+    this.indexI = value;
   }
+
+  get index(): number {
+    return this.indexI;
+  }
+
   @Input() piece: Piece;
+  @Input() higlighted: boolean;
 
   getCoord(i: number): PositionCoord {
     return {
@@ -23,6 +31,9 @@ export class TileComponent {
   }
 
   getStyle({ x, y }: PositionCoord) {
+    if (this.higlighted) {
+      return { backgroundColor: 'green' } 
+    } else
     return ((x + y) % 2 === 1)
         ? { backgroundColor: '#81401e' }
         : { backgroundColor: '#d6cf8d' }
