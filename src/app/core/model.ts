@@ -1,6 +1,6 @@
 export interface PositionCoord{
-  positionX: number,
-  positionY: number,
+  x: number;
+  y: number;
 }
 
 
@@ -14,7 +14,7 @@ export interface PositionCoord{
 //     tileY: number,
 // }
 
-export enum PieceColor{
+export enum PieceColor {
     BLACK,
     WHITE
 }

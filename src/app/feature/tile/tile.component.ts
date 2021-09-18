@@ -1,4 +1,5 @@
-import { PositionCoord } from './../../core/model';
+import { Piece } from './../piece/piece';
+import { PositionCoord, PieceColor } from './../../core/model';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -12,18 +13,23 @@ export class TileComponent {
   @Input() set index(value: number) {
     this.position = this.getCoord(value);
   }
+  @Input() piece: Piece;
 
   getCoord(i: number): PositionCoord {
     return {
-      positionX: i % 8,
-      positionY: Math.floor(i / 8)
+      x: i % 8,
+      y: Math.floor(i / 8)
     }
   }
 
-  getStyle({ positionX, positionY }: PositionCoord) {
-    return ((positionX + positionY) % 2 === 1)
-        ? { backgroundColor: '#81401e', color: 'black' }
-        : { backgroundColor: '#d6cf8d', color: 'white' }
+  getStyle({ x, y }: PositionCoord) {
+    return ((x + y) % 2 === 1)
+        ? { backgroundColor: '#81401e' }
+        : { backgroundColor: '#d6cf8d' }
+  }
+
+  getPieceColor(color: PieceColor): any {
+    return (color === PieceColor.BLACK) ? { color: 'black' } : { color: 'white' };
   }
 
 }

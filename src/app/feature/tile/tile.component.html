@@ -1,3 +1,5 @@
 <div [ngStyle]="getStyle(position)">
-  <ng-content></ng-content>
+  <ng-container *ngIf="piece">
+    <span [ngStyle]="getPieceColor(piece.color)">{{piece.unicode}}</span>
+  </ng-container>
 </div>

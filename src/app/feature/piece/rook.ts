@@ -1,18 +1,18 @@
 import { PieceColor, PositionCoord } from './../../core/model';
 import { Piece } from './piece';
 
-export class King implements Piece {
+export class Rook implements Piece {
   color: PieceColor;
   unicode: string;
 
-  constructor(color: PieceColor, unicode: string) {
+  constructor(color: PieceColor) {
     this.color = color;
-    this.unicode = unicode
+    this.unicode = '♖';
   }
 
   possibleMoves(pos: PositionCoord): Array<PositionCoord> {
     return [
-      {positionY: 0, positionX: 0}
+      {y: 0, x: 0}
     ]
   }
 

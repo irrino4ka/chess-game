@@ -4,7 +4,7 @@ import { BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class ChessService {
-  knightPosition$ = new BehaviorSubject<PositionCoord>({ positionX: 3, positionY: 2 });
+  knightPosition$ = new BehaviorSubject<PositionCoord>({ x: 3, y: 2 });
   currentPosition: PositionCoord;
 
   constructor() {
@@ -13,16 +13,16 @@ export class ChessService {
     })
 }
 
-  moveKnight(value: PositionCoord) {
-      this.knightPosition$.next(value);
-  }
+  // moveKnight(value: PositionCoord) {
+  //     this.knightPosition$.next(value);
+  // }
 
-  canMoveKnight(value: PositionCoord) {
-    const { positionX, positionY } = this.currentPosition;
-    const dx = value.positionX - positionX;
-    const dy = value.positionY - positionY;
+  // canMoveKnight(value: PositionCoord) {
+  //   const { x, y } = this.currentPosition;
+  //   const dx = value.x - x;
+  //   const dy = value.y - y;
 
-    return (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
-           (Math.abs(dx) === 1 && Math.abs(dy) === 2);
-}
+  //   return (Math.abs(dx) === 2 && Math.abs(dy) === 1) ||
+  //          (Math.abs(dx) === 1 && Math.abs(dy) === 2);
+  // }
 }

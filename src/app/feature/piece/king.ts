@@ -12,7 +12,7 @@ export class King implements Piece {
 
   possibleMoves(pos: PositionCoord): Array<PositionCoord> {
     return [
-      {positionY: 0, positionX: 0}
+      {y: 0, x: 0}
     ]
   }
 

@@ -5,14 +5,14 @@ export class Pawn implements Piece {
   color: PieceColor;
   unicode: string;
 
-  constructor(color: PieceColor, unicode: string) {
+  constructor(color: PieceColor) {
     this.color = color;
-    this.unicode = unicode
+    this.unicode = '♙'
   }
 
   possibleMoves(pos: PositionCoord): Array<PositionCoord> {
     return [
-      {positionY: 0, positionX: 0}
+      {y: 0, x: 0}
     ]
   }
 
