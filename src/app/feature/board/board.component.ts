@@ -21,6 +21,7 @@ export class BoardComponent {
 
   matrixRange = range(64);
   pieces = Array(63).fill(0);
+  moves: any;
   highlightedTiles = Array(63);
 
   constructor(private chessService: ChessService) {
@@ -59,22 +60,35 @@ export class BoardComponent {
     console.log(ev, index);
     this.highlightedTiles = Array(63);
     this.highlightedTiles[index] = true;
-  }
+    this.highlightedTiles = Array(63);
+    this.pos = index;
 
-  // dragStart(event) {
-  //   console.log(event);
-  //   event.dataTransfer.setData("text", event.target.id);
-  // }
+    this.moves = this.pieces[index].possibleMoves({x : index % 8, y: Math.floor(index / 8)});
+    this.moves.forEach(position => {
+      const idx = position.y * 8 + position.x;
+      this.highlightedTiles[idx] = true;
+    });
+  }
 
   drag(ev, i: number) {
     this.pos = i;
+    this.moves = this.pieces[i].possibleMoves({x : i % 8, y: Math.floor(i / 8)});
+    this.moves.forEach(position => {
+      const idx = position.y * 8 + position.x;
+      this.highlightedTiles[idx] = true;
+    });
+
   }
 
   drop(ev, tile) {
     ev.preventDefault();
-    console.log('drop', ev.targets, tile);
+    console.log('drop', ev.targets, tile, this.pos);
     this.pieces[tile.index] = this.pieces[this.pos];
-    this.pieces[this.pos] = 0;
+    if (this.pos !== tile.index) {this.pieces[this.pos] = 0};
+    this.moves.forEach(position => {
+      const idx = position.y * 8 + position.x;
+      this.highlightedTiles[idx] = false;
+    });
   }
 
   allowDrop(ev) {
