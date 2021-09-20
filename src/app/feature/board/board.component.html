@@ -1,9 +1,21 @@
 <div class="container">
   <div class="board">
-    <div *ngFor="let i of matrixRange">
-      <app-tile #tile [index]="i" [piece]="pieces[i]" [higlighted]="highlightedTiles[i]" (click)='clickTile($event, i)'
-        draggable="true" (drop)="drop($event, tile)" (dragover)="allowDrop($event)" (dragstart)="drag($event, i)">
-      </app-tile>
+    <div *ngFor="let y of range1">
+      <ng-container *ngFor="let x of range2">
+        <app-tile
+          #tile
+          draggable="true"
+          [piece]="pieces[x][y]"
+          [position]="getCoord(x, y)"
+          [higlighted]="highlightedTiles[x][y]"
+          (click)='clickTile($event, x, y)'
+          (drop)="drop($event, tile)"
+          (dragover)="allowDrop($event)" 
+          (dragstart)="drag($event, x, y)"
+
+        >
+        </app-tile>
+      </ng-container>
     </div>
   </div>
 </div>

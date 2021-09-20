@@ -8,31 +8,20 @@ import { Component, Input } from '@angular/core';
     styleUrls: ['./tile.component.scss']
 })
 export class TileComponent {
-  position: PositionCoord;
-  private indexI: number;
+  positionValue: PositionCoord;
 
-  @Input() set index(value: number) {
-    this.position = this.getCoord(value);
-    this.indexI = value;
+  @Input() set position({x, y}) {
+    this.positionValue = {x: x, y: y};
   }
-
-  get index(): number {
-    return this.indexI;
+  get position(): PositionCoord {
+    return this.positionValue;
   }
-
   @Input() piece: Piece;
   @Input() higlighted: boolean;
 
-  getCoord(i: number): PositionCoord {
-    return {
-      x: i % 8,
-      y: Math.floor(i / 8)
-    }
-  }
-
   getStyle({ x, y }: PositionCoord) {
     if (this.higlighted) {
-      return { backgroundColor: 'green' } 
+      return { backgroundColor: '#549054b3' } 
     } else
     return ((x + y) % 2 === 1)
         ? { backgroundColor: '#81401e' }
